@@ -2,9 +2,13 @@
 
 **_This project is personally forked and temporarily patched version of [python-instagram](https://github.com/facebookarchive/python-instagram). Proceed at your own risk!_**
 
+## Things patched
+
+- Media model comment enumeration bug
+- New instagram carousel functionality
+
 - - - 
 
-[![Build Status](https://travis-ci.org/Seraphicer/python-instagram.svg?branch=master)](https://travis-ci.org/Seraphicer/python-instagram)
 
 python-instagram
 ======

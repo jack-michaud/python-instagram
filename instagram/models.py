@@ -47,7 +47,6 @@ class Media(ApiModel):
 
     def __init__(self, id=None, **kwargs):
         self.id = id
-        self._kwargs = kwargs
         for key, value in six.iteritems(kwargs):
             setattr(self, key, value)
 
@@ -97,6 +96,7 @@ class Media(ApiModel):
 
         new_media.comment_count = entry['comments']['count']
         new_media.comments = []
+
         for comment in entry['comments'].get('data', []):
             new_media.comments.append(Comment.object_from_dictionary(comment))
 
@@ -105,7 +105,7 @@ class Media(ApiModel):
             for user_in_photo in entry['users_in_photo']:
                 new_media.users_in_photo.append(UserInPhoto.object_from_dictionary(user_in_photo))
 
-        new_media.created_at = timestamp_to_datetime(entry['created_time'])
+        new_media.created_time = timestamp_to_datetime(entry['created_time'])
 
         if entry['location'] and 'id' in entry:
             new_media.location = Location.object_from_dictionary(entry['location'])
