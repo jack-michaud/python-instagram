@@ -77,9 +77,17 @@ class Media(ApiModel):
 
         new_media.user = User.object_from_dictionary(entry['user'])
 
-        new_media.images = {}
-        for version, version_info in six.iteritems(entry['images']):
-            new_media.images[version] = Image.object_from_dictionary(version_info)
+        if new_media.type == "carousel":
+            new_media.images = []
+            for image_json in entry['carousel_media']:
+                image = {}
+                for version, version_info in six.iteritems(image_json['images']):
+                    image[version] = Image.object_from_dictionary(version_info)
+                new_media.images.append(image)
+        else:
+            new_media.images = {}
+            for version, version_info in six.iteritems(entry['images']):
+                new_media.images[version] = Image.object_from_dictionary(version_info)
 
         if new_media.type == 'video':
             new_media.videos = {}
